@@ -3,6 +3,6 @@
     public interface ClientRepository
     {
 
-        Client? GetById(string clientId);
+        Client GetById(string clientId);
     }
 }

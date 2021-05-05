@@ -1,6 +1,6 @@
 ﻿namespace dddApp.model
 {
-    public interface IGerantRepository
+    public interface GerantRepository
     {
     }
 }

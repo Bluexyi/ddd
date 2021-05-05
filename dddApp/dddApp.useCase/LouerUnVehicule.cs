@@ -20,13 +20,14 @@ namespace dddApp.useCase
 
         public Location Louer(string vehiculeId, string clientId, DateTime dateDebut, DateTime dateFin, string etatVehicule)
         {
-            Client? client = clientRepository.GetById(clientId);
-            Vehicule? vehicule = vehiculeRepository.GetById(vehiculeId);
+            Client client = clientRepository.GetById(clientId);
+            Vehicule vehicule = vehiculeRepository.GetById(vehiculeId);
             
-            if (!client.HasValue) {
+            if (client == null) {
                 throw new ClientNonTrouveException(clientId);
             }
-            if (!vehicule.HasValue) {
+
+            if (vehicule == null) {
                 throw new VehiculeNonTrouveException(vehiculeId);
             }
 

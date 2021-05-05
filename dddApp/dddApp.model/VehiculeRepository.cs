@@ -3,6 +3,6 @@
     public interface VehiculeRepository
     {
 
-        Vehicule? GetById(string vehiculeId);
+        Vehicule GetById(string vehiculeId);
     }
 }

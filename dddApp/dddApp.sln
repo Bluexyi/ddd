@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "dddApp.model", "dddApp.mode
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "dddApp.useCase", "dddApp.useCase\dddApp.useCase.csproj", "{0F406F35-9B12-4ACA-A2C5-FD57A79E7D78}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "dddApp.unitTest", "dddApp.unitTest\dddApp.unitTest.csproj", "{F23FE9E6-15E8-4FEE-BF12-0F6F59DAB4D7}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{0F406F35-9B12-4ACA-A2C5-FD57A79E7D78}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0F406F35-9B12-4ACA-A2C5-FD57A79E7D78}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0F406F35-9B12-4ACA-A2C5-FD57A79E7D78}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F23FE9E6-15E8-4FEE-BF12-0F6F59DAB4D7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F23FE9E6-15E8-4FEE-BF12-0F6F59DAB4D7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F23FE9E6-15E8-4FEE-BF12-0F6F59DAB4D7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F23FE9E6-15E8-4FEE-BF12-0F6F59DAB4D7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -4,18 +4,19 @@ namespace dddApp.model
 {
     public class Vehicule
     {
-        public string immatriculation { get; set; }
-        public string marque { get; set; }
-        public string modele { get; set; }
-        public int kilometrage { get; set; }
-        public DateTime dateDerniereRevision { get; set; }
-        public string disponibilite { get; set; }
-        public string typeCarburant { get; set; }
-        public DateTime dateControleTechnique { get; set; }
-        public int typeForfait { get; set; }
-        public string categorie { get; set; }
-        public int vignettePollution { get; set; }
-        public Agence agence { get; set; }
+        public string Immatriculation { get; set; }
+        public string Marque { get; set; }
+        public string Modele { get; set; }
+        public long Kilometrage { get; set; }
+        public DateTime DateDerniereRevision { get; set; }
+        public VehiculeDisponibiliteEnum Disponibilite { get; set; }
+        public EtatEnum Etat { get; set; }
+        public string TypeCarburant { get; set; }
+        public DateTime DateControleTechnique { get; set; }
+        public VehiculeForfaitEnum TypeForfait { get; set; }
+        public VehiculeCategorieEnum Categorie { get; set; }
+        public int VignettePollution { get; set; }
+        public Agence Agence { get; set; }
 
 
     }

@@ -1,24 +1,28 @@
 ﻿using dddApp.model;
+using dddApp.useCase.Exceptions;
 using System;
+using System.Linq;
 
 namespace dddApp.useCase
 {
     public class LouerUnVehicule
     {
-        private ClientRepository clientRepository;
-        private VehiculeRepository vehiculeRepository;
-        private AgenceRepository agenceRepository;
-        private LocationRepository locationRepository;
+        private readonly ClientRepository clientRepository;
+        private readonly VehiculeRepository vehiculeRepository;
+        private readonly LocationRepository locationRepository;
 
-        public LouerUnVehicule(ClientRepository clientRepository, VehiculeRepository vehiculeRepository, AgenceRepository agenceRepository, LocationRepository locationRepository)
+        public LouerUnVehicule(
+            ClientRepository clientRepository,
+            VehiculeRepository vehiculeRepository,
+            LocationRepository locationRepository
+        )
         {
             this.clientRepository = clientRepository;
             this.vehiculeRepository = vehiculeRepository;
-            this.agenceRepository = agenceRepository;
             this.locationRepository = locationRepository;
         }
 
-        public Location Louer(string vehiculeId, string clientId, DateTime dateDebut, DateTime dateFin, string etatVehicule)
+        public Location Louer(string vehiculeId, string clientId, DateTime dateDebut, DateTime dateFin)
         {
             Client client = clientRepository.GetById(clientId);
             Vehicule vehicule = vehiculeRepository.GetById(vehiculeId);
@@ -31,28 +35,42 @@ namespace dddApp.useCase
                 throw new VehiculeNonTrouveException(vehiculeId);
             }
 
-            if (dateDebut > dateFin)
+            if (dateDebut >= dateFin)
             {
                 throw new DateInvalidException();
             }
 
-            if (vehicule.disponibilite != "disponible")
+            if (locationRepository.GetAll().Any(x =>
+                x.Vehicule == vehicule &&
+                (
+                    (dateDebut >= x.DateDebutLocation) &&
+                    (x.DateDebutLocation <= dateFin)
+                ) ||
+                (
+                    (dateDebut >= x.DateFinLocation) &&
+                    (x.DateFinLocation <= dateFin)
+                )
+            ))
             {
                 throw new VehiculeIndisponibleException();
             }
 
-            if (!client.permisValide)
+            if (vehicule.Disponibilite != VehiculeDisponibiliteEnum.DISPONIBLE)
+            {
+                throw new VehiculeIndisponibleException();
+            }
+
+            if (!client.PermisValide)
             {
                 throw new PermisClientInvalidException();
             }
 
-            Location location = new Location
+            Location location = new()
             {
-                client = client,
-                vehicule = vehicule,
-                dateDebutLocation = dateDebut,
-                dateFinLocation = dateFin,
-                etatAvantLocation = etatVehicule
+                Client = client,
+                Vehicule = vehicule,
+                DateDebutLocation = dateDebut,
+                DateFinLocation = dateFin
             };
 
             locationRepository.Save(location);

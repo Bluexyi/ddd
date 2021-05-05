@@ -6,7 +6,7 @@ namespace dddApp.infrastructure.repository
 
     public class StaticAgenceRepository : AgenceRepository
     {
-        private static Dictionary<string, Agence> dataBase = new Dictionary<string, Agence>();
+        private static readonly Dictionary<string, Agence> dataBase = new();
 
         public Agence GetById(string agenceId)
         {

@@ -6,7 +6,7 @@ namespace dddApp.infrastructure.repository
 
     public class StaticVehiculeRepository : VehiculeRepository
     {
-        private static Dictionary<string, Vehicule> dataBase = new Dictionary<string, Vehicule>();
+        private static readonly Dictionary<string, Vehicule> dataBase = new();
 
         public Vehicule GetById(string vehiculeId)
         {

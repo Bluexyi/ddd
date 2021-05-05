@@ -4,11 +4,11 @@ namespace dddApp.model
 {
     public class Location
     {
-        public Vehicule vehicule { get; set; }
-        public Client client { get; set; }
-        public string etatAvantLocation { get; set; }
-        public string etatApresLocation { get; set; }
-        public DateTime dateDebutLocation { get; set; }
-        public DateTime dateFinLocation { get; set; }
+        public Vehicule Vehicule { get; set; }
+        public Client Client { get; set; }
+        public EtatEnum EtatAvantLocation { get; set; }
+        public EtatEnum EtatApresLocation { get; set; }
+        public DateTime DateDebutLocation { get; set; }
+        public DateTime DateFinLocation { get; set; }
     }
 }

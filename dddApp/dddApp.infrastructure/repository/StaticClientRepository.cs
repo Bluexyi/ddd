@@ -6,7 +6,7 @@ namespace dddApp.infrastructure.repository
 
     public class StaticClientRepository : ClientRepository
     {
-        private static Dictionary<string, Client> dataBase = new Dictionary<string, Client>();
+        private static readonly Dictionary<string, Client> dataBase = new();
 
         public Client GetById(string clientId)
         {

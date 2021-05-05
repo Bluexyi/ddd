@@ -4,11 +4,11 @@ namespace dddApp.model
 {
     public class Client
     {
-        public string nom { get; set; }
-        public string prenom { get; set; }
-        public bool permisValide { get; set; }
-        public DateTime dateNaissance { get; set; }
-        public string numTelephone { get; set; }
-        public string adresse { get; set; }
+        public string Nom { get; set; }
+        public string Prenom { get; set; }
+        public bool PermisValide { get; set; }
+        public DateTime DateNaissance { get; set; }
+        public string NumTelephone { get; set; }
+        public string Adresse { get; set; }
     }
 }

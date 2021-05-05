@@ -1,4 +1,5 @@
-namespace dddApp.useCase {
+namespace dddApp.useCase.Exceptions
+{
     public class VehiculeNonTrouveException : System.Exception
     {
         public VehiculeNonTrouveException() { }

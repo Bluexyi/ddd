@@ -2,6 +2,8 @@ using dddApp.model;
 using dddApp.unitTest.mockRepository;
 using dddApp.useCase;
 using NUnit.Framework;
+using System;
+using System.Linq;
 
 namespace dddApp.unitTest
 {
@@ -23,15 +25,33 @@ namespace dddApp.unitTest
             agenceRepository = new MockAgenceRepository();
             locationRepository = new MockLocationRepository();
 
-            louerUnVehicule = new LouerUnVehicule(clientRepository, vehiculeRepository, agenceRepository, locationRepository);
+            louerUnVehicule = new LouerUnVehicule(clientRepository, vehiculeRepository, locationRepository);
         }
 
         [Test]
-        public void Test1()
+        public void LocationDeVehiculePossible()
         {
-            clientRepository.Add("13", new Client { permisValide = true });
-            vehiculeRepository.Add("2", new Vehicule { disponibilite = "disponible" });
-            Assert.IsNotNull(louerUnVehicule.Louer("2", "13", new System.DateTime(1993,6,7), new System.DateTime(1993, 6, 8), "BON"));
+            Client client = new()
+            {
+                PermisValide = true
+            };
+            Vehicule vehicule = new()
+            {
+                Disponibilite = VehiculeDisponibiliteEnum.DISPONIBLE
+            };
+            clientRepository.Add("13", client);
+            vehiculeRepository.Add("2", vehicule);
+
+            DateTime dateDebut = new(1993, 6, 7);
+            DateTime dateFin = new(1993, 6, 8);
+
+            Location location = louerUnVehicule.Louer("2", "13", dateDebut, dateFin);
+            Assert.IsNotNull(location);
+            Assert.AreEqual(location.DateDebutLocation, dateDebut);
+            Assert.AreEqual(location.DateFinLocation, dateFin);
+            Assert.AreEqual(location.Client, client);
+            Assert.AreEqual(location.Vehicule, vehicule);
+            Assert.AreEqual(locationRepository.GetAll().Count(), 1);
         }
 
     }

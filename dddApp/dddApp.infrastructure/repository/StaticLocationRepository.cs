@@ -6,7 +6,13 @@ namespace dddApp.infrastructure.repository
 {
     public class StaticLocationRepository : LocationRepository
     {
-        private static Dictionary<string, Location> dataBase = new Dictionary<string, Location>();
+        private static readonly Dictionary<string, Location> dataBase = new();
+
+        public IEnumerable<Location> GetAll()
+        {
+            return dataBase.Values;
+        }
+
         public void Save(Location location)
         {
             string id = Guid.NewGuid().ToString();

@@ -1,4 +1,5 @@
-namespace dddApp.useCase {
+namespace dddApp.useCase.Exceptions
+{
     public class PermisClientInvalidException : System.Exception
     {
         public PermisClientInvalidException() { }

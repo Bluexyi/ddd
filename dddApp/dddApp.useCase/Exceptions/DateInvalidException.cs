@@ -1,4 +1,5 @@
-namespace dddApp.useCase {
+namespace dddApp.useCase.Exceptions
+{
     public class DateInvalidException : System.Exception
     {
         public DateInvalidException() { }

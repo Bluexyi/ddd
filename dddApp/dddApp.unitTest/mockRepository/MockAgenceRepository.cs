@@ -6,7 +6,7 @@ namespace dddApp.unitTest.mockRepository
 
     public class MockAgenceRepository : AgenceRepository
     {
-        public static Dictionary<string, Agence> dataBase = new Dictionary<string, Agence>();
+        public static Dictionary<string, Agence> dataBase = new();
 
         public Agence GetById(string agenceId)
         {

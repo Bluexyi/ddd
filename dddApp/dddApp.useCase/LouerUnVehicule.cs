@@ -35,7 +35,7 @@ namespace dddApp.useCase
                 throw new VehiculeNonTrouveException(vehiculeId);
             }
 
-            if (dateDebut >= dateFin)
+            if (dateDebut > dateFin)
             {
                 throw new DateInvalidException();
             }
@@ -51,11 +51,6 @@ namespace dddApp.useCase
                     (x.DateFinLocation <= dateFin)
                 )
             ))
-            {
-                throw new VehiculeIndisponibleException();
-            }
-
-            if (vehicule.Disponibilite != VehiculeDisponibiliteEnum.DISPONIBLE)
             {
                 throw new VehiculeIndisponibleException();
             }

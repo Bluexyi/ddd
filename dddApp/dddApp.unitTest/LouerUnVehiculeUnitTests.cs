@@ -1,6 +1,7 @@
 using dddApp.model;
 using dddApp.unitTest.mockRepository;
 using dddApp.useCase;
+using dddApp.useCase.Exceptions;
 using NUnit.Framework;
 using System;
 using System.Linq;
@@ -52,6 +53,36 @@ namespace dddApp.unitTest
             Assert.AreEqual(location.Client, client);
             Assert.AreEqual(location.Vehicule, vehicule);
             Assert.AreEqual(locationRepository.GetAll().Count(), 1);
+        }
+
+        [Test]
+        public void LouerUnVehiculeQuiNexistePas()
+        {
+            Client client = new()
+            {
+                PermisValide = true
+            };
+            clientRepository.Add("13", client);
+
+            DateTime dateDebut = new(1993, 6, 7);
+            DateTime dateFin = new(1993, 6, 8);
+
+            Assert.Throws<VehiculeNonTrouveException>(() => louerUnVehicule.Louer("2", "13", dateDebut, dateFin));
+        }
+
+        [Test]
+        public void LouerUnVehiculeParUnClientQuiNexistePas()
+        {
+            Vehicule vehicule = new()
+            {
+                Disponibilite = VehiculeDisponibiliteEnum.DISPONIBLE
+            };
+            vehiculeRepository.Add("2", vehicule);
+
+            DateTime dateDebut = new(1993, 6, 7);
+            DateTime dateFin = new(1993, 6, 8);
+
+            Assert.Throws<ClientNonTrouveException>(() => louerUnVehicule.Louer("2", "13", dateDebut, dateFin));
         }
 
     }

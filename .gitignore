@@ -2,9 +2,5 @@
 # Ce fichier .gitignore a été automatiquement créé par Microsoft(R) Visual Studio.
 ################################################################################
 
-/dddApp/.vs/dddApp/v16
-/dddApp/dddApp/obj
-/dddApp/dddApp.infrastructure/obj
-/dddApp/dddApp.model/obj
-/dddApp/dddApp.useCase/obj
-/.vs
+**/.vs/
+**/obj

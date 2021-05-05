@@ -2,5 +2,7 @@
 {
     public interface VehiculeRepository
     {
+
+        Vehicule? GetById(string vehiculeId);
     }
 }

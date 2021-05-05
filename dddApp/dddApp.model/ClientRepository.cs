@@ -2,5 +2,7 @@
 {
     public interface ClientRepository
     {
+
+        Client? GetById(string clientId);
     }
 }

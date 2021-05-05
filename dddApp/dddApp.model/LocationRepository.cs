@@ -2,5 +2,6 @@
 {
     public interface LocationRepository
     {
+        void Save(Location location);
     }
 }

@@ -18,21 +18,31 @@ namespace dddApp.useCase
             this.locationRepository = locationRepository;
         }
 
-        public Location Louer(Vehicule vehicule, Client client, DateTime dateDebut, DateTime dateFin, string etatVehicule)
+        public Location Louer(string vehiculeId, string clientId, DateTime dateDebut, DateTime dateFin, string etatVehicule)
         {
+            Client? client = clientRepository.GetById(clientId);
+            Vehicule? vehicule = vehiculeRepository.GetById(vehiculeId);
+            
+            if (!client.HasValue) {
+                throw new ClientNonTrouveException(clientId);
+            }
+            if (!vehicule.HasValue) {
+                throw new VehiculeNonTrouveException(vehiculeId);
+            }
+
             if (dateDebut > dateFin)
             {
-                return null;
+                throw new DateInvalidException();
             }
 
             if (vehicule.disponibilite != "disponible")
             {
-                return null;
+                throw new VehiculeIndisponibleException();
             }
 
             if (!client.permisValide)
             {
-                return null;
+                throw new PermisClientInvalidException();
             }
 
             Location location = new Location
@@ -43,6 +53,8 @@ namespace dddApp.useCase
                 dateFinLocation = dateFin,
                 etatAvantLocation = etatVehicule
             };
+
+            locationRepository.Save(location);
 
             return location;
         }

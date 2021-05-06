@@ -7,13 +7,23 @@ namespace dddApp.model
 {
     public class Location
     {
-        public Vehicule Vehicule { get; set; }
-        public Client Client { get; set; }
-        public EtatEnum EtatAvantLocation { get; set; }
-        public EtatEnum EtatApresLocation { get; set; }
-        public DateTime DateDebutLocation { get; set; }
-        public DateTime DateFinLocation { get; set; }
-        public string EtatLocation { get; set; }
+        public Vehicule Vehicule { get; }
+        public Client Client { get; }
+        public EtatEnum EtatAvantLocation { get; }
+        public EtatEnum EtatApresLocation { get; }
+        public DateTime DateDebutLocation { get; }
+        public DateTime DateFinLocation { get; }
+        public string EtatLocation { get; }
+        public Location(Vehicule vehicule, Client client, EtatEnum etatAvantLocation, EtatEnum etatApresLocation, DateTime dateDebutLocation, DateTime dateFinLocation, string etatLocation)
+        {
+            this.Vehicule = vehicule;
+            this.Client = client;
+            this.EtatAvantLocation = etatAvantLocation;
+            this.EtatApresLocation = etatApresLocation;
+            this.DateDebutLocation = dateDebutLocation;
+            this.DateFinLocation = dateFinLocation;
+            this.EtatLocation = etatLocation;
+        }
 
         public static Location CreerLocation(string vehiculeId, string clientId, DateTime dateDebut, DateTime dateFin, Client client, Vehicule vehicule, List<Location> locations)
         {

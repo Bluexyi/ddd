@@ -6,19 +6,37 @@ namespace dddApp.model
 {
     public class Vehicule
     {
-        public string Immatriculation { get; set; }
-        public string Marque { get; set; }
-        public string Modele { get; set; }
-        public long Kilometrage { get; set; }
-        public DateTime DateDerniereRevision { get; set; }
-        public VehiculeDisponibiliteEnum Disponibilite { get; set; }
-        public EtatEnum Etat { get; set; }
-        public string TypeCarburant { get; set; }
-        public DateTime DateControleTechnique { get; set; }
-        public VehiculeForfaitEnum TypeForfait { get; set; }
-        public VehiculeCategorieEnum Categorie { get; set; }
-        public int VignettePollution { get; set; }
-        public Agence Agence { get; set; }
+        public string Immatriculation { get; }
+        public string Marque { get; }
+        public string Modele { get; }
+        public long Kilometrage { get; }
+        public DateTime DateDerniereRevision { get; }
+        public VehiculeDisponibiliteEnum Disponibilite { get; }
+        public EtatEnum Etat { get; }
+        public string TypeCarburant { get; }
+        public DateTime DateControleTechnique { get; }
+        public VehiculeForfaitEnum TypeForfait { get; }
+        public VehiculeCategorieEnum Categorie { get; }
+        public int VignettePollution { get; }
+        public Agence Agence { get; }
+        public Vehicule(string immatriculation, string marque, string modele, long kilometrage, 
+            DateTime dateDerniereRevision, VehiculeDisponibiliteEnum disponibilite, EtatEnum etat, 
+            string typeCarburant, DateTime dateControleTechnique, VehiculeForfaitEnum typeForfait, VehiculeCategorieEnum categorie, int vignettePollution, Agence agence)
+        {
+            this.Immatriculation = immatriculation;
+            this.Marque = marque;
+            this.Modele = modele;
+            this.Kilometrage = kilometrage;
+            this.DateDerniereRevision = dateDerniereRevision;
+            this.Disponibilite = disponibilite;
+            this.Etat = etat;
+            this.TypeCarburant = typeCarburant;
+            this.DateControleTechnique = dateControleTechnique;
+            this.TypeForfait = typeForfait;
+            this.Categorie = categorie;
+            this.VignettePollution = vignettePollution;
+            this.Agence = agence;
+        }
 
         public bool EstDisponible(DateTime dateDebut, DateTime dateFin, List<Location> locations)
         {

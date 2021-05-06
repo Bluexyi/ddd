@@ -52,13 +52,8 @@ namespace dddApp.model
                 throw new PermisClientInvalidException();
             }
 
-            Location location = new()
-            {
-                Client = client,
-                Vehicule = vehicule,
-                DateDebutLocation = dateDebut,
-                DateFinLocation = dateFin
-            };
+            Location location = new(vehicule, client, vehicule.Etat, vehicule.Etat, dateDebut, dateFin, "");
+            
             return location;
         }
     }

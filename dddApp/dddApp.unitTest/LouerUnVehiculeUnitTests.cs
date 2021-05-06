@@ -30,14 +30,10 @@ namespace dddApp.unitTest
         [Test]
         public void LocationDeVehiculePossible()
         {
-            Client client = new()
-            {
-                PermisValide = true
-            };
-            Vehicule vehicule = new()
-            {
-                Disponibilite = VehiculeDisponibiliteEnum.DISPONIBLE
-            };
+            Client client = new("Dabin", "Mégane", true, new DateTime(1997, 12, 3), "0123456789", "Paris");
+            Vehicule vehicule = new("DJ555LR", "Peugeot", "106", 182000, DateTime.Now, VehiculeDisponibiliteEnum.DISPONIBLE, EtatEnum.EN_ETAT_D_USAGE, "Essence",
+                new DateTime(2020, 3, 3), VehiculeForfaitEnum.A, VehiculeCategorieEnum.BERLINE, 6, null);
+
             clientRepository.Add("13", client);
             vehiculeRepository.Add("2", vehicule);
 
@@ -56,10 +52,7 @@ namespace dddApp.unitTest
         [Test]
         public void LouerUnVehiculeQuiNexistePas()
         {
-            Client client = new()
-            {
-                PermisValide = true
-            };
+            Client client = new("Dabin", "Mégane", true, new DateTime(1997, 12, 3), "0123456789", "Paris");
             clientRepository.Add("13", client);
 
             DateTime dateDebut = new(1993, 6, 7);
@@ -71,10 +64,8 @@ namespace dddApp.unitTest
         [Test]
         public void LouerUnVehiculeParUnClientQuiNexistePas()
         {
-            Vehicule vehicule = new()
-            {
-                Disponibilite = VehiculeDisponibiliteEnum.DISPONIBLE
-            };
+            Vehicule vehicule = new("DJ555LR", "Peugeot", "106", 182000, DateTime.Now, VehiculeDisponibiliteEnum.DISPONIBLE, EtatEnum.EN_ETAT_D_USAGE, "Essence",
+                new DateTime(2020, 3, 3), VehiculeForfaitEnum.A, VehiculeCategorieEnum.BERLINE, 6, null);
             vehiculeRepository.Add("2", vehicule);
 
             DateTime dateDebut = new(1993, 6, 7);
@@ -86,24 +77,16 @@ namespace dddApp.unitTest
         [Test]
         public void LouerUnVehiculeIndisponible()
         {
-            Vehicule vehicule = new();
+            Vehicule vehicule = new("DJ555LR", "Peugeot", "106", 182000, DateTime.Now, VehiculeDisponibiliteEnum.DISPONIBLE, EtatEnum.EN_ETAT_D_USAGE, "Essence",
+                new DateTime(2020, 3, 3), VehiculeForfaitEnum.A, VehiculeCategorieEnum.BERLINE, 6, null);
             vehiculeRepository.Add("2", vehicule);
-            Client client = new()
-            {
-                PermisValide = true
-            };
+            Client client = new("Dabin", "Mégane", true, new DateTime(1997, 12, 3), "0123456789", "Paris");
             clientRepository.Add("13", client);
 
             DateTime dateDebut = new(1993, 6, 7);
             DateTime dateFin = new(1993, 6, 8);
 
-            Location locationAutreClient = new()
-            {
-                DateDebutLocation = dateDebut,
-                DateFinLocation = dateFin,
-                Vehicule = vehicule,
-                Client = client
-            };
+            Location locationAutreClient = new(vehicule, client, EtatEnum.EN_ETAT_D_USAGE, EtatEnum.EN_ETAT_D_USAGE, dateDebut, dateFin, "");
             locationRepository.Save(locationAutreClient);
 
             Assert.Throws<VehiculeIndisponibleException>(() => louerUnVehicule.Louer("2", "13", dateDebut, dateFin));
@@ -113,14 +96,9 @@ namespace dddApp.unitTest
         [Test]
         public void LocationDeVehiculeDatesInvalides()
         {
-            Client client = new()
-            {
-                PermisValide = true
-            };
-            Vehicule vehicule = new()
-            {
-                Disponibilite = VehiculeDisponibiliteEnum.DISPONIBLE
-            };
+            Client client = new("Dabin", "Mégane", true, new DateTime(1997, 12, 3), "0123456789", "Paris");
+            Vehicule vehicule = new("DJ555LR", "Peugeot", "106", 182000, DateTime.Now, VehiculeDisponibiliteEnum.DISPONIBLE, EtatEnum.EN_ETAT_D_USAGE, "Essence",
+                new DateTime(2020, 3, 3), VehiculeForfaitEnum.A, VehiculeCategorieEnum.BERLINE, 6, null);
             clientRepository.Add("13", client);
             vehiculeRepository.Add("2", vehicule);
 

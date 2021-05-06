@@ -6,7 +6,7 @@ namespace dddApp.unitTest.mockRepository
 {
     public class MockLocationRepository : LocationRepository
     {
-        private Dictionary<string, Location> dataBase = new();
+        private readonly Dictionary<string, Location> dataBase = new();
 
         public IEnumerable<Location> GetAll()
         {

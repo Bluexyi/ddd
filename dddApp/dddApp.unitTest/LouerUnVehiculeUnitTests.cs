@@ -110,5 +110,25 @@ namespace dddApp.unitTest
 
         }
 
+        [Test]
+        public void LocationDeVehiculeDatesInvalides()
+        {
+            Client client = new()
+            {
+                PermisValide = true
+            };
+            Vehicule vehicule = new()
+            {
+                Disponibilite = VehiculeDisponibiliteEnum.DISPONIBLE
+            };
+            clientRepository.Add("13", client);
+            vehiculeRepository.Add("2", vehicule);
+
+            DateTime dateDebut = new(1994, 6, 7);
+            DateTime dateFin = new(1993, 6, 8);
+
+            Assert.Throws<DateInvalidException>(() => louerUnVehicule.Louer("2", "13", dateDebut, dateFin));
+        }
+
     }
 }

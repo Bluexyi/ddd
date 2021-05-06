@@ -6,17 +6,17 @@ namespace dddApp.unitTest.mockRepository
 
     public class MockClientRepository : ClientRepository
     {
-        private Dictionary<string, Client> DataBase { get; set; } = new Dictionary<string, Client>();
+        private readonly Dictionary<string, Client> dataBase = new();
 
         public Client GetById(string clientId)
         {
-            bool found = DataBase.TryGetValue(clientId, out Client result);
+            bool found = dataBase.TryGetValue(clientId, out Client result);
             return found ? result : null;
         }
 
         public void Add(string id, Client client)
         {
-            DataBase.Add(id, client);
+            dataBase.Add(id, client);
         }
 
     }

@@ -15,7 +15,6 @@ namespace dddApp.unitTest
 
         private MockClientRepository clientRepository;
         private MockVehiculeRepository vehiculeRepository;
-        private MockAgenceRepository agenceRepository;
         private MockLocationRepository locationRepository;
 
         [SetUp]
@@ -23,7 +22,6 @@ namespace dddApp.unitTest
         {
             clientRepository = new MockClientRepository();
             vehiculeRepository = new MockVehiculeRepository();
-            agenceRepository = new MockAgenceRepository();
             locationRepository = new MockLocationRepository();
 
             louerUnVehicule = new LouerUnVehicule(clientRepository, vehiculeRepository, locationRepository);
@@ -83,6 +81,33 @@ namespace dddApp.unitTest
             DateTime dateFin = new(1993, 6, 8);
 
             Assert.Throws<ClientNonTrouveException>(() => louerUnVehicule.Louer("2", "13", dateDebut, dateFin));
+        }
+
+        [Test]
+        public void LouerUnVehiculeIndisponible()
+        {
+            Vehicule vehicule = new();
+            vehiculeRepository.Add("2", vehicule);
+            Client client = new()
+            {
+                PermisValide = true
+            };
+            clientRepository.Add("13", client);
+
+            DateTime dateDebut = new(1993, 6, 7);
+            DateTime dateFin = new(1993, 6, 8);
+
+            Location locationAutreClient = new()
+            {
+                DateDebutLocation = dateDebut,
+                DateFinLocation = dateFin,
+                Vehicule = vehicule,
+                Client = client
+            };
+            locationRepository.Save(locationAutreClient);
+
+            Assert.Throws<VehiculeIndisponibleException>(() => louerUnVehicule.Louer("2", "13", dateDebut, dateFin));
+
         }
 
     }

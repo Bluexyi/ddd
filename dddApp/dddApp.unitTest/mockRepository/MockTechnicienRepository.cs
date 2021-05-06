@@ -5,6 +5,6 @@ namespace dddApp.unitTest.mockRepository
 {
     public class MockTechnicienRepository : TechnicienRepository
     {
-        public static Dictionary<string, Technicien> dataBase = new Dictionary<string, Technicien>();
+        private Dictionary<string, Technicien> dataBase = new Dictionary<string, Technicien>();
     }
 }

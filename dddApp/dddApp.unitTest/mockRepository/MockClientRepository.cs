@@ -6,7 +6,7 @@ namespace dddApp.unitTest.mockRepository
 
     public class MockClientRepository : ClientRepository
     {
-        public static Dictionary<string, Client> DataBase { get; set; } = new Dictionary<string, Client>();
+        private Dictionary<string, Client> DataBase { get; set; } = new Dictionary<string, Client>();
 
         public Client GetById(string clientId)
         {

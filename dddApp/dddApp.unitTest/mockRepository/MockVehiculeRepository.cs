@@ -6,7 +6,7 @@ namespace dddApp.unitTest.mockRepository
 
     public class MockVehiculeRepository : VehiculeRepository
     {
-        public static Dictionary<string, Vehicule> DataBase = new Dictionary<string, Vehicule>();
+        private Dictionary<string, Vehicule> DataBase = new Dictionary<string, Vehicule>();
 
         public Vehicule GetById(string vehiculeId)
         {

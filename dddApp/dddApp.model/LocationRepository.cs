@@ -6,5 +6,7 @@ namespace dddApp.model
     {
         void Save(Location location);
         IEnumerable<Location> GetAll();
+
+        void Update(string locationId, Location location);
     }
 }

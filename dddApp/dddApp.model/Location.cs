@@ -10,5 +10,6 @@ namespace dddApp.model
         public EtatEnum EtatApresLocation { get; set; }
         public DateTime DateDebutLocation { get; set; }
         public DateTime DateFinLocation { get; set; }
+        public string EtatLocation { get; set; }
     }
 }

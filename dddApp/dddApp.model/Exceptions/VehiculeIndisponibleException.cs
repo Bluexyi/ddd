@@ -1,6 +1,6 @@
 using System;
 
-namespace dddApp.useCase.Exceptions
+namespace dddApp.model.Exceptions
 {
     public class VehiculeIndisponibleException : Exception
     {

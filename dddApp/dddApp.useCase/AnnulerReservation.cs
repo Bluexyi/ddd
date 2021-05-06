@@ -1,3 +1,7 @@
+using dddApp.model;
+using dddApp.model.Exceptions;
+using System;
+
 namespace dddApp.useCase
 {
     public class AnnulerReservation {
@@ -15,7 +19,7 @@ namespace dddApp.useCase
                 throw new LocationNonTrouveException(locationId);
             }
 
-            bool payeSupplement = location.DateDebutLocation.Substract(dateAnnulation).Hours < 24;
+            bool payeSupplement = location.DateDebutLocation.Subtract(dateAnnulation).Hours < 24;
 
             location.EtatLocation = "Annulé";
 

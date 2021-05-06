@@ -1,6 +1,6 @@
 ﻿using dddApp.model;
-using dddApp.useCase.Exceptions;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace dddApp.useCase
@@ -26,47 +26,9 @@ namespace dddApp.useCase
         {
             Client client = clientRepository.GetById(clientId);
             Vehicule vehicule = vehiculeRepository.GetById(vehiculeId);
-            
-            if (client == null) {
-                throw new ClientNonTrouveException(clientId);
-            }
+            List<Location> locations = locationRepository.GetAll().ToList();
 
-            if (vehicule == null) {
-                throw new VehiculeNonTrouveException(vehiculeId);
-            }
-
-            if (dateDebut > dateFin)
-            {
-                throw new DateInvalidException();
-            }
-
-            if (locationRepository.GetAll().Any(x =>
-                x.Vehicule == vehicule &&
-                (
-                    (dateDebut >= x.DateDebutLocation) &&
-                    (x.DateDebutLocation <= dateFin)
-                ) ||
-                (
-                    (dateDebut >= x.DateFinLocation) &&
-                    (x.DateFinLocation <= dateFin)
-                )
-            ))
-            {
-                throw new VehiculeIndisponibleException();
-            }
-
-            if (!client.PermisValide)
-            {
-                throw new PermisClientInvalidException();
-            }
-
-            Location location = new()
-            {
-                Client = client,
-                Vehicule = vehicule,
-                DateDebutLocation = dateDebut,
-                DateFinLocation = dateFin
-            };
+            Location location = Location.CreerLocation(vehiculeId, clientId, dateDebut, dateFin, client, vehicule, locations);
 
             locationRepository.Save(location);
 

@@ -1,7 +1,7 @@
 using dddApp.model;
 using dddApp.unitTest.mockRepository;
 using dddApp.useCase;
-using dddApp.useCase.Exceptions;
+using dddApp.model.Exceptions;
 using NUnit.Framework;
 using System;
 using System.Linq;

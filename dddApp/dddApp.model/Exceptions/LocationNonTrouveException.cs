@@ -1,4 +1,4 @@
-namespace dddApp.useCase.Exceptions
+namespace dddApp.model.Exceptions
 {
     public class LocationNonTrouveException : System.Exception
     {

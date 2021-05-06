@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace dddApp.model
 {
@@ -18,6 +20,19 @@ namespace dddApp.model
         public int VignettePollution { get; set; }
         public Agence Agence { get; set; }
 
-
+        public bool EstDisponible(DateTime dateDebut, DateTime dateFin, List<Location> locations)
+        {
+            return !locations.Any(x =>
+                x.Vehicule == this &&
+                (
+                    (dateDebut >= x.DateDebutLocation) &&
+                    (x.DateDebutLocation <= dateFin)
+                ) ||
+                (
+                    (dateDebut >= x.DateFinLocation) &&
+                    (x.DateFinLocation <= dateFin)
+                )
+            );
+        }
     }
 }

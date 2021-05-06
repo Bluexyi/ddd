@@ -8,5 +8,6 @@ namespace dddApp.model
         IEnumerable<Location> GetAll();
 
         void Update(string locationId, Location location);
+        Location GetById(string locationId);
     }
 }

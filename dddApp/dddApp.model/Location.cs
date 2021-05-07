@@ -27,10 +27,7 @@ namespace dddApp.model
 
         public static Location CreerLocation(string vehiculeId, string clientId, DateTime dateDebut, DateTime dateFin, Client client, Vehicule vehicule, List<Location> locations)
         {
-            if (client == null)
-            {
-                throw new ClientNonTrouveException(clientId);
-            }
+            Client.ClientExiste(clientId, client);
 
             if (vehicule == null)
             {
@@ -42,10 +39,7 @@ namespace dddApp.model
                 throw new DateInvalidException();
             }
 
-            if (!vehicule.EstDisponible(dateDebut, dateFin, locations))
-            {
-                throw new VehiculeIndisponibleException();
-            }
+            vehicule.VerifierDisponibiliteVehicule(dateDebut, dateFin, locations);
 
             if (!client.PermisValide)
             {
@@ -53,7 +47,7 @@ namespace dddApp.model
             }
 
             Location location = new(vehicule, client, vehicule.Etat, vehicule.Etat, dateDebut, dateFin, "");
-            
+
             return location;
         }
     }

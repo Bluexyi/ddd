@@ -108,5 +108,21 @@ namespace dddApp.unitTest
             Assert.Throws<DateInvalidException>(() => louerUnVehicule.Louer("2", "13", dateDebut, dateFin));
         }
 
+        [Test]
+        public void LocationDeVehiculeClientSansPermis()
+        {
+            Client client = new("Dabin", "Mégane", false, new DateTime(1997, 12, 3), "0123456789", "Paris");
+            Vehicule vehicule = new("DJ555LR", "Peugeot", "106", 182000, DateTime.Now, VehiculeDisponibiliteEnum.DISPONIBLE, EtatEnum.EN_ETAT_D_USAGE, "Essence",
+                new DateTime(2020, 3, 3), VehiculeForfaitEnum.A, VehiculeCategorieEnum.BERLINE, 6, null);
+
+            clientRepository.Add("13", client);
+            vehiculeRepository.Add("2", vehicule);
+
+            DateTime dateDebut = new(1993, 6, 7);
+            DateTime dateFin = new(1993, 6, 8);
+
+            Assert.Throws<PermisClientInvalidException>(() => louerUnVehicule.Louer("2", "13", dateDebut, dateFin));
+        }
+
     }
 }

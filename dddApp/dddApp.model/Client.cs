@@ -1,4 +1,5 @@
-﻿using System;
+﻿using dddApp.model.Exceptions;
+using System;
 
 namespace dddApp.model
 {
@@ -19,6 +20,14 @@ namespace dddApp.model
             this.DateNaissance = dateNaissance;
             this.NumTelephone = numTelephone;
             this.Adresse = adresse;
+        }
+
+        public static void ClientExiste(string clientId, Client client)
+        {
+            if (client == null)
+            {
+                throw new ClientNonTrouveException(clientId);
+            }
         }
     }
 }

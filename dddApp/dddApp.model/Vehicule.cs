@@ -1,4 +1,5 @@
-﻿using System;
+﻿using dddApp.model.Exceptions;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -41,7 +42,7 @@ namespace dddApp.model
         public bool EstDisponible(DateTime dateDebut, DateTime dateFin, List<Location> locations)
         {
             return !locations.Any(x =>
-                x.Vehicule == this &&
+                x.Vehicule.Equals(this) &&
                 (
                     (dateDebut >= x.DateDebutLocation) &&
                     (x.DateDebutLocation <= dateFin)
@@ -51,6 +52,19 @@ namespace dddApp.model
                     (x.DateFinLocation <= dateFin)
                 )
             );
+        }
+        public void VerifierDisponibiliteVehicule(DateTime dateDebut, DateTime dateFin, List<Location> locations)
+        {
+            if (!EstDisponible(dateDebut, dateFin, locations))
+            {
+                throw new VehiculeIndisponibleException();
+            }
+        }
+
+        public override bool Equals(object obj)
+        {
+            return obj is Vehicule vehicule &&
+                   Immatriculation == vehicule.Immatriculation;
         }
     }
 }
